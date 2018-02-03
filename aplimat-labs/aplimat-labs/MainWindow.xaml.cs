@@ -31,8 +31,8 @@ namespace aplimat_labs
         }
 
         //private CubeMesh myCube = new CubeMesh();
-        
 
+        public Randomizer COLORrng = new Randomizer(0, 1);
         private List<CubeMesh> myCubes = new List<CubeMesh>();
    
         private void OpenGLControl_OpenGLDraw(object sender, SharpGL.SceneGraph.OpenGLEventArgs args)
@@ -44,19 +44,20 @@ namespace aplimat_labs
 
             // Move Left And Into The Screen
             gl.LoadIdentity();
-            gl.Color(1, 0, 0);
+            //gl.Color(1.0, 0.0, 1.0);
             gl.Translate(0.0f, 0.0f, -70.0f);
 
             CubeMesh myCube = new CubeMesh();
             Randomizer rng = new Randomizer(-20, 20);
+            
             myCube.Position = new Vector3(Gaussian.Generate(0, 15), 0, 0);
            
             myCubes.Add(myCube);
             foreach(var cube in myCubes)
             {
                 cube.Draw(gl);
-                cube.Position += new Vector3(0, rng.GenerateDouble() - 1, 0);
-                
+                cube.Position += new Vector3(0, rng.GenerateDouble(), 0);
+                gl.Color(COLORrng.GenerateDouble(), COLORrng.GenerateDouble(), COLORrng.GenerateDouble());
             }
 
           //  myCubes.Add(myCube);
@@ -86,8 +87,8 @@ namespace aplimat_labs
             gl.Light(OpenGL.GL_LIGHT0, OpenGL.GL_AMBIENT, light0ambient);
             gl.Light(OpenGL.GL_LIGHT0, OpenGL.GL_DIFFUSE, light0diffuse);
             gl.Light(OpenGL.GL_LIGHT0, OpenGL.GL_SPECULAR, light0specular);
-            gl.Enable(OpenGL.GL_LIGHTING);
-            gl.Enable(OpenGL.GL_LIGHT0);
+            gl.Disable(OpenGL.GL_LIGHTING);
+            gl.Disable(OpenGL.GL_LIGHT0);
 
             gl.ShadeModel(OpenGL.GL_SMOOTH);
         }
