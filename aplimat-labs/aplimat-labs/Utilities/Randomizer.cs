@@ -14,7 +14,7 @@ namespace aplimat_labs.Utilities
         public Randomizer(double _min, double _max)
         {
             this.min = _min;
-            this.max = _max + 1; //add one because
+            this.max = _max + 1; //add one because Random's max is exclusive value
             this.random = new Random();
         }
 

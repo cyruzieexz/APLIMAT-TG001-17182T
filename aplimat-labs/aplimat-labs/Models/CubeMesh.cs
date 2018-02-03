@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace aplimat_labs
 {
     public class CubeMesh
@@ -25,15 +26,17 @@ namespace aplimat_labs
         {
             this.Position = newPos;
         }
-
+        
         public void Draw(OpenGL gl)
         {
             gl.Begin(OpenGL.GL_TRIANGLE_STRIP);
+            gl.Color(1.0,0.0,0.0);
             //Front face
             gl.Vertex(this.Position.x - 0.5f, this.Position.y + 0.5f, this.Position.z + 0.5f);
             gl.Vertex(this.Position.x - 0.5f, this.Position.y - 0.5f, this.Position.z + 0.5f);
             gl.Vertex(this.Position.x + 0.5f, this.Position.y + 0.5f, this.Position.z + 0.5f);
             gl.Vertex(this.Position.x + 0.5f, this.Position.y - 0.5f, this.Position.z + 0.5f);
+           
             //Right face
             gl.Vertex(this.Position.x + 0.5f, this.Position.y + 0.5f, this.Position.z - 0.5f);
             gl.Vertex(this.Position.x + 0.5f, this.Position.y - 0.5f, this.Position.z - 0.5f);
@@ -45,6 +48,7 @@ namespace aplimat_labs
             gl.Vertex(this.Position.x - 0.5f, this.Position.y - 0.5f, this.Position.z + 0.5f);
             gl.End();
             gl.Begin(OpenGL.GL_TRIANGLE_STRIP);
+            gl.Color(1.0, 0.0, 0.0);
             //Top face
             gl.Vertex(this.Position.x - 0.5f, this.Position.y + 0.5f, this.Position.z + 0.5f);
             gl.Vertex(this.Position.x + 0.5f, this.Position.y + 0.5f, this.Position.z + 0.5f);
@@ -52,6 +56,7 @@ namespace aplimat_labs
             gl.Vertex(this.Position.x + 0.5f, this.Position.y + 0.5f, this.Position.z - 0.5f);
             gl.End();
             gl.Begin(OpenGL.GL_TRIANGLE_STRIP);
+            gl.Color(1.0, 0.0, 0.0);
             //Bottom face
             gl.Vertex(this.Position.x - 0.5f, this.Position.y - 0.5f, this.Position.z + 0.5f);
             gl.Vertex(this.Position.x + 0.5f, this.Position.y - 0.5f, this.Position.z + 0.5f);

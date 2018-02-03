@@ -30,8 +30,11 @@ namespace aplimat_labs
             //while (true) Console.WriteLine(rng.Generate());
         }
 
-        private CubeMesh myCube = new CubeMesh();
-        private Randomizer rng = new Randomizer(-1, 1);
+        //private CubeMesh myCube = new CubeMesh();
+        
+
+        private List<CubeMesh> myCubes = new List<CubeMesh>();
+   
         private void OpenGLControl_OpenGLDraw(object sender, SharpGL.SceneGraph.OpenGLEventArgs args)
         {
             OpenGL gl = args.OpenGL;
@@ -41,11 +44,26 @@ namespace aplimat_labs
 
             // Move Left And Into The Screen
             gl.LoadIdentity();
-            gl.Translate(0.0f, 0.0f, -40.0f);
+            gl.Color(1, 0, 0);
+            gl.Translate(0.0f, 0.0f, -70.0f);
 
+            CubeMesh myCube = new CubeMesh();
+            Randomizer rng = new Randomizer(-20, 20);
+            myCube.Position = new Vector3(Gaussian.Generate(0, 15), 0, 0);
+           
+            myCubes.Add(myCube);
+            foreach(var cube in myCubes)
+            {
+                cube.Draw(gl);
+                cube.Position += new Vector3(0, rng.GenerateDouble() - 1, 0);
+                
+            }
 
-            myCube.Position += new Vector3(rng.GenerateInt(), rng.GenerateInt(), rng.GenerateInt());
-            myCube.Draw(gl);
+          //  myCubes.Add(myCube);
+
+           
+            
+           // myCube.Draw(gl);
         }
 
         private void OpenGLControl_OpenGLInitialized(object sender, SharpGL.SceneGraph.OpenGLEventArgs args)
