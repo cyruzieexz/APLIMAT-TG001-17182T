@@ -26,6 +26,8 @@ namespace aplimat_labs
         public MainWindow()
         {
             InitializeComponent();
+            myVector = a - b;
+            Console.WriteLine(myVector.GetMagnitute());
 
             //while (true) Console.WriteLine(rng.Generate());
         }
@@ -33,38 +35,87 @@ namespace aplimat_labs
         //private CubeMesh myCube = new CubeMesh();
 
         public Randomizer COLORrng = new Randomizer(0, 1);
-        private List<CubeMesh> myCubes = new List<CubeMesh>();
-   
+        //private List<CubeMesh> myCubes = new List<CubeMesh>();
+        private CubeMesh myCube = new CubeMesh();
+        private Vector3 velocity = new Vector3(1, 1, 0);
+        //private Vector mouse = new Vector3(Mousex, Mousey);
+
+        private float speed = 2.0f;
+
+        private Vector3 myVector = new Vector3();
+
+        private Vector3 a = new Vector3(3, 5, 0);
+        private Vector3 b = new Vector3(-7, -6, 0);
+       
+
         private void OpenGLControl_OpenGLDraw(object sender, SharpGL.SceneGraph.OpenGLEventArgs args)
         {
             OpenGL gl = args.OpenGL;
-
+            //myVector = a - b;
             // Clear The Screen And The Depth Buffer
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
 
             // Move Left And Into The Screen
             gl.LoadIdentity();
-            //gl.Color(1.0, 0.0, 1.0);
-            gl.Translate(0.0f, 0.0f, -70.0f);
+            gl.Translate(0.0f, 0.0f, -40.0f);
+            //vector a
+           // gl.Color(0.0, 1.0, 0.0);
+         
+            //gl.Begin(OpenGL.GL_LINE_STRIP);
+            //gl.Vertex(a.x, a.y);
+            //gl.Vertex(b.x, b.y);
+            //gl.End();
 
-            CubeMesh myCube = new CubeMesh();
-            Randomizer rng = new Randomizer(-20, 20);
-            
-            myCube.Position = new Vector3(Gaussian.Generate(0, 15), 0, 0);
-           
-            myCubes.Add(myCube);
-            foreach(var cube in myCubes)
+
+            //gl.Color(1.0, 0.0, 0.0);
+            // vector b
+            //gl.Begin(OpenGL.GL_LINE_STRIP);
+            //gl.Vertex(0, 0);
+            //gl.Vertex(a.x, a.y);
+            //gl.End();
+
+            //vector c
+            //gl.Color(0.0, 0.0, 1.0);
+            //gl.Begin(OpenGL.GL_LINE_STRIP);
+            //gl.Vertex(b.x, b.y);
+            //gl.Vertex(0, 0);
+           // gl.End();
+
+            //gl.DrawText(0, 0, 1, 1, 1, "Arial", 15, "my Vector magnitude: " + myVector.GetMagnitute());
+
+            myCube.Draw(gl);
+            myCube.Position += velocity * speed;
+
+            if (myCube.Position.x >= 28.0f)
             {
-                cube.Draw(gl);
-                cube.Position += new Vector3(0, rng.GenerateDouble(), 0);
-                gl.Color(COLORrng.GenerateDouble(), COLORrng.GenerateDouble(), COLORrng.GenerateDouble());
+                velocity.x = -1;
+            }
+            else if (myCube.Position.x <= -28.0f)
+            {
+
             }
 
-          //  myCubes.Add(myCube);
 
-           
+            myCube.Draw(gl);
+
             
-           // myCube.Draw(gl);
+           // CubeMesh myCube = new CubeMesh();
+            Randomizer rng = new Randomizer(-20, 20);
+
+            
+            //myCube.Position = new Vector3(Gaussian.Generate(0, 15), 0, 0);
+           
+            //myCubes.Add(myCube);
+            //foreach (var cube in myCubes)
+           // {
+               // myCube.Draw(gl);
+               
+                //cube.Position += new Vector3(0, rng.GenerateDouble(), 0);
+              //  gl.Color(COLORrng.GenerateDouble(), COLORrng.GenerateDouble(), COLORrng.GenerateDouble());
+
+
+            //}
+           
         }
 
         private void OpenGLControl_OpenGLInitialized(object sender, SharpGL.SceneGraph.OpenGLEventArgs args)
