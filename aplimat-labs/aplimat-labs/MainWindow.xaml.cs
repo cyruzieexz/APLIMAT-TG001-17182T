@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace aplimat_labs
 {
     /// <summary>
@@ -37,35 +38,64 @@ namespace aplimat_labs
         public Randomizer COLORrng = new Randomizer(0, 1);
         //private List<CubeMesh> myCubes = new List<CubeMesh>();
         private CubeMesh myCube = new CubeMesh();
-        private Vector3 velocity = new Vector3(1, 1, 0);
-        //private Vector mouse = new Vector3(Mousex, Mousey);
-
-        private float speed = 2.0f;
+        //private Vector3 velocity = new Vector3(1, 1, 0);
+        //private Vector3 center = ();
+        //private Vector3 mouse = Mouse.SetCursor(1);
+      
+        //private float speed = 2.0f;
 
         private Vector3 myVector = new Vector3();
 
-        private Vector3 a = new Vector3(3, 5, 0);
-        private Vector3 b = new Vector3(-7, -6, 0);
-       
+        private Vector3 a = new Vector3(0, 0, 0);
+        private Vector3 b = new Vector3(5, 7, 0);
+        const char _right = 'd', _left = 'a', _up = 'w', _down = 's';
+        //private float Thickness = 3.0f;
 
         private void OpenGLControl_OpenGLDraw(object sender, SharpGL.SceneGraph.OpenGLEventArgs args)
         {
             OpenGL gl = args.OpenGL;
-            //myVector = a - b;
+            myVector = a - b;
             // Clear The Screen And The Depth Buffer
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
 
             // Move Left And Into The Screen
             gl.LoadIdentity();
-            gl.Translate(0.0f, 0.0f, -40.0f);
+            gl.Translate(0.0f, 0.0f, -30.0f);
             //vector a
-           // gl.Color(0.0, 1.0, 0.0);
-         
-            //gl.Begin(OpenGL.GL_LINE_STRIP);
+            //gl.Color(0.0, 1.0, 0.0);
+
+            //  gl.Begin(OpenGL.GL_LINE_STRIP);
             //gl.Vertex(a.x, a.y);
             //gl.Vertex(b.x, b.y);
             //gl.End();
+            //myCube.Draw(gl);
 
+           // int x = xvalue.location.X;
+
+           
+
+            gl.Color(0.0f, 0.8f, 1.1f);
+            gl.LineWidth(15);
+            gl.Begin(OpenGL.GL_LINE_STRIP);
+            gl.Vertex(a.x, a.y);
+            gl.Vertex(b.x, b.y);
+            gl.End();
+
+            gl.Color(1.0f, 1.0f, 1.0f);
+            gl.LineWidth(3);
+            gl.Begin(OpenGL.GL_LINE_STRIP);
+            gl.Vertex(a.x, a.y);
+            gl.Vertex(b.x, b.y);
+            gl.End();
+
+            if (myCube.Position.x >= 28.0f )
+            {
+               a.x = -1;
+            }
+            else if (myCube.Position.x <= -28.0f)
+            {
+                a.x = 1;
+            }
 
             //gl.Color(1.0, 0.0, 0.0);
             // vector b
@@ -76,30 +106,26 @@ namespace aplimat_labs
 
             //vector c
             //gl.Color(0.0, 0.0, 1.0);
-            //gl.Begin(OpenGL.GL_LINE_STRIP);
-            //gl.Vertex(b.x, b.y);
-            //gl.Vertex(0, 0);
-           // gl.End();
+            // gl.Begin(OpenGL.GL_LINE_STRIP);
+            // gl.Vertex(b.x, b.y);
+            // gl.Vertex(0, 0);
+            // gl.End();
 
-            //gl.DrawText(0, 0, 1, 1, 1, "Arial", 15, "my Vector magnitude: " + myVector.GetMagnitute());
+            gl.DrawText(0, 0, 1, 1, 1, "Arial", 15, "my Vector magnitude: " + myVector.GetMagnitute());
 
-            myCube.Draw(gl);
-            myCube.Position += velocity * speed;
+           // myCube.Draw(gl);
+            //myCube.Position += velocity * speed;
 
-            if (myCube.Position.x >= 28.0f)
-            {
-                velocity.x = -1;
-            }
-            else if (myCube.Position.x <= -28.0f)
-            {
+            //if (myCube.Position.x >= 28.0f)
+            //{
+             //   velocity.x = -1;
+            //}
+            //else if (myCube.Position.x <= -28.0f)
+            //{
 
-            }
-
-
-            myCube.Draw(gl);
-
-            
-           // CubeMesh myCube = new CubeMesh();
+            //}
+           
+            // CubeMesh myCube = new CubeMesh();
             Randomizer rng = new Randomizer(-20, 20);
 
             
