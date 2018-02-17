@@ -11,6 +11,6 @@
         <sharpGL:OpenGLControl
             OpenGLDraw="OpenGLControl_OpenGLDraw"
             OpenGLInitialized="OpenGLControl_OpenGLInitialized"
-            RenderContextType="FBO" />
+            RenderContextType="FBO"/>
     </Grid>
 </Window>
